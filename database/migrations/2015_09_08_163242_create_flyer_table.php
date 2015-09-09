@@ -14,6 +14,7 @@ class CreateFlyerTable extends Migration
     {
         Schema::create('flyer', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('user_id')->unsigned();
             $table->string('street');
             $table->string('city', 40);
             $table->string('country', 40);
@@ -32,6 +33,6 @@ class CreateFlyerTable extends Migration
      */
     public function down()
     {
-        Schema::drop('flyers');
+        Schema::drop('flyer');
     }
 }

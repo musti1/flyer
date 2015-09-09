@@ -20,17 +20,24 @@ class Flyer extends Model
 
 	];
 
-	public function scopeLocatedAt($query, $zip, $street){
+	public static function LocatedAt($zip, $street){
 
 		$street = str_replace('-', ' ', $street);
 
-		return $query->where(compact('zip', 'street'));
+		return static::where(compact('zip', 'street'))->first();
 	}
 
 	public function getPriceAttribute($price){
 
 		return '$' . number_format($price);
 	}
+
+	public function addPhoto(Flyer_photos $photo){
+
+		return $this->photos()->save($photo);
+
+	}
+
 	/**
 	 * A flyer is composed of many photos
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -38,5 +45,24 @@ class Flyer extends Model
     public function photos(){
 
     	return $this->hasMany('App\Flyer_photos');
+    }
+
+    /**
+     * A flyer is owned by a user.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function owner(){
+
+    	return $this->belongsTo('App\User', 'user_id');
+    }
+
+    /**
+     * Determined if the given user created the flyer
+     * @param  User   $user 
+     * @return boolean
+     */
+    public function ownedBy(User $user){
+
+    	return $this->user_id == $user->id;
     }
 }

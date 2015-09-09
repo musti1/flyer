@@ -5,12 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Flyer;
+use App\Flyer_photos;
+
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 use App\Http\Requests\FlyerRequest;
+use App\Http\Requests\ChangeFlyerRequest;
 use App\Http\Controllers\Controller;
 
 class FlyerController extends Controller
 {
+
+    public function __construct(){
+
+            $this->middleware('auth', ['except' => ['show']]);
+
+            parent::__construct();
+
+
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -46,7 +60,7 @@ class FlyerController extends Controller
        //flash('Success','Flyer successfully created');
 
        flash()->success('Success','Flyer successfully created');
-       return redirect()->back();
+       return redirect('flyer/create');
     }
 
     /**
@@ -58,9 +72,17 @@ class FlyerController extends Controller
     public function show($zip, $street)
     {
 
-        $flyer = Flyer::LocatedAt($zip, $street)->first();
+        $flyer = Flyer::LocatedAt($zip, $street);
 
         return view('flyers.show', compact('flyer'));
+    }
+
+    public function addPhoto($zip, $street, ChangeFlyerRequest $request){
+
+        $photo = Flyer_photos::fromFile($request->file('photo'));
+
+        Flyer::LocatedAt($zip, $street)->addPhoto($photo);
+
     }
 
     /**

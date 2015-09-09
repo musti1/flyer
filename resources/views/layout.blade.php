@@ -10,6 +10,8 @@
 	<link rel="stylesheet" href="/css/app.css">
 
 	<link rel="stylesheet" href="/css/libs.css">
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/4.0.1/dropzone.css">
 </head>
 
 <body>
@@ -31,6 +33,16 @@
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
+
+          @if ($signedIn)
+          
+          <p class="navbar-text navbar-right">
+          	
+          	Hello, {{ $user->name }}
+          </p>
+
+          @endif 
+
         </div><!--/.nav-collapse -->
       </div>
     </nav>
@@ -43,6 +55,8 @@
 
 
 <script src="/js/libs.js"></script>
+
+@yield('scripts.footer')
 
 @include('flash')
 	

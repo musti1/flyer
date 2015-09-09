@@ -1,6 +1,11 @@
-<div class="form-group">
+
+<div class="row">
+
+<div class="col-md-6">
 
 {{ csrf_field() }}
+
+<div class="form-group">
 			
 			<label for="street">Street:</label>
 
@@ -48,8 +53,11 @@
 			<input type="text" name="state" id="state" class="form-control" value="{{ old('state') }}">
 
 		</div>
+	</div>
 
-		<hr>
+		
+
+		<div class="col-md-6">
 
 		<div class="form-group">
 			
@@ -71,7 +79,16 @@
 
 		</div>
 
+		</div>
 
+		<div class="col-md-12">
+
+		<hr>
+
+
+		<div class="form-group">
 
 		<button class="btn btn-primary">Submit</button>
-
+    </div>
+    </div>
+</div>

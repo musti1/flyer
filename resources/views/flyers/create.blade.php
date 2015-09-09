@@ -7,9 +7,8 @@
 
 	<hr>
 
-	<div class="row">
 
-	<form method="POST" action="/flyers" enctype="multipart/form-data" class="col-md-6">
+	<form method="POST" action="/flyer" enctype="multipart/form-data">
 		
 		@include('flyers.form')
 
@@ -29,6 +28,5 @@
 
 	</form>
 
-	</div>
 
 @stop
