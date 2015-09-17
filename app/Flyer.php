@@ -10,6 +10,8 @@ class Flyer extends Model
 
 	protected $fillable = [
 
+
+		'user_id',
 		'street',
 		'city',
 		'state',
